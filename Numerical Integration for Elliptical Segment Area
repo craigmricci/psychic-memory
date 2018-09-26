@@ -1,0 +1,50 @@
+import numpy as np
+import scipy
+from matplotlib import pyplot as plt
+import math
+from math import pi
+
+u=0      #x-position of the center
+v=0      #y-position of the center
+a_1=9.5  #radius on the x-axis
+b_1=10   #radius on the y-axis
+
+#law of sines calculations
+
+angleA = 54.85
+angleB = 90
+angleC = 180-angleA-angleB
+
+A = math.radians(angleA)        #angle A (all angles converted to radians)
+B = math.radians(angleB)        #angle B 
+C = math.radians(angleC)        #angle C
+
+a = 8                           #side length a (height of goal post, in ft.)
+b = (a*math.sin(B))/math.sin(A) #side b
+c = (a*math.sin(C))/math.sin(A) #side c
+m = a/c                         #slope calculation
+
+t = np.linspace(0, 2*pi, 100)
+plt.plot( u+a_1*np.cos(t) , v+b_1*np.sin(t) )
+plt.plot([0,c], [0,a])
+plt.plot([0,-c],[0,a])
+plt.grid(color='lightgray',linestyle='--')
+
+def f(t):
+    return a_1*np.cos(t)
+def g(x):
+    return b_1*np.sin(t)
+
+x_val = []
+y_val = []
+t = A
+while A <= t <= (2*B-A):
+    x_val.append(f(t))
+    y_val.append(g(f(t)))
+    t = t+.0314159265
+#print("x-coordinates:",(x_val))
+#print("y-coordinates:",(y_val)
+plt.plot(x_val, y_val)
+plt.show()
+#print("x-values:",x_val)
+#print("y-values:",y_val)
